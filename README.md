@@ -1,5 +1,3 @@
-# Student_management_system
-This is a secure student management system offering registration and login for Teachers and Students. It is also full of many useful feature and and provide exclusive functionalities
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -158,8 +156,8 @@ void UpdateRecord() {
         cout << "Student with Registration No " << searchReg << " not found!" << endl;
         remove("temp.txt"); 
     } else {
-        remove("student.txt");          
-        rename("temp.txt", "student.txt"); 
+        remove("student.txt");  // Delete the original file        
+        rename("temp.txt", "student.txt"); // Rename the temporary file to the original file name
     }
 }
 
@@ -297,9 +295,10 @@ void GradCheck() {
 //student records ends here
 //registration starts here for teachers 
 void RegistrationTeacher() {
-	ofstream inFile("student.txt", ios::app);
-	
 	system("cls");
+	
+	ofstream inFile("teacher.txt", ios::app);
+	
 	cin.ignore(); 
 	string name, password, quez ;
 	string ID;	
@@ -309,16 +308,16 @@ void RegistrationTeacher() {
 	getline(cin, ID);
 	cout<<"Enter your Passwpord : ";
 	getline(cin, password);
-	cout<<"Who is your favourait football player ?";
+	cout<<"Who is your favourait football player ? :- ";
 	getline(cin, quez);
-	inFile <<name<<","<<password<<","<<quez<<endl;
+	inFile <<name<<","<<ID<<","<<password<<","<<quez<<endl;
 	inFile.close();
 }
 
 void LoginTeacher() { 
 
     system("cls");
-    ifstream inFile("student.txt"); // Open teacher file for reading
+    ifstream inFile("teacher.txt"); // Open teacher file for reading
     bool found = false;
     cin.ignore();
     string registration, password;
@@ -327,11 +326,12 @@ void LoginTeacher() {
     cout << "Enter Password: ";
     getline(cin, password);
 
-    string storeName, storeReg, storePass;
+    string storeName, storeReg, storePass, storeQuez;
 
     while (getline(inFile, storeName, ',') &&  
            getline(inFile, storeReg, ',') && 
-           getline(inFile, storePass)) 
+           getline(inFile, storePass, ',') && 
+           getline(inFile, storeQuez)) 
 		   {
         if (storeReg == registration && storePass == password) {
             found = true;
@@ -366,16 +366,12 @@ void LoginTeacher() {
 
     if (!found) {
         cout << "\nInvalid Registration ID or Password!" << endl;
-    }
-    
-	
+    }	
 }
-
-
 
 //Registrations starst here for students
 void RegistrationStudent() {
-
+	system("cls");
 	ofstream outFile("student.txt", ios::app);
 	cin.ignore(); 
 	
@@ -395,7 +391,7 @@ void RegistrationStudent() {
 }
 
 void ResetPassStudents() {
-
+	system("cls");
     ifstream inFile("student.txt");
     ofstream tempFile("temp.txt");
     cin.ignore();
@@ -465,6 +461,8 @@ void LoginStudent() {
     		cout<<"Loading please wait !"<<endl;
     		system("cls");
     		
+    		D:
+    		system("cls");
     		Sleep(2000);
     		int choice;
     		cout<<"1 Add Records : "<<endl;
@@ -478,14 +476,17 @@ void LoginStudent() {
     		switch(choice) {
     			case 1:
     				AddRecord();
+    				goto D;
     				break;
     			
     			case 2:
     				SearchRecord();
+    				goto D;
     				break;
     				
     			case 3:
     				UpdateRecord();
+    				goto D;
     				break;
     				
     			case 4:
@@ -494,10 +495,12 @@ void LoginStudent() {
     				
     			case 5:
     				ViewRecord();
+    				goto D;
     				break;
     		
     			case 6:
     				GradCheck();
+    				goto D;
     				break;
     				
     			case 7:
@@ -506,13 +509,9 @@ void LoginStudent() {
     				
     			default :
     				break;
-			}//switch
-    		
-		}
-    	
-	}
-    
-    
+			}//switch	
+		}	
+	}  
 }
 
 int main() {
@@ -526,6 +525,7 @@ int main() {
 	
 	A:	
 	cout<<"\t\t\t\t1  Teacher "<<endl;
+	cout<<"\t\t\t\t2  Student "<<endl<<endl;
 	cout<<"\t\t\t\t2  Student "<<endl<<endl;
 	cout<<"Enter your choice ! "<<endl;
 	cin>>choice;
@@ -551,16 +551,15 @@ int main() {
 				
 			case 3:
 				system("cls");
-				goto A;
 				cout<<"Thank you for using SMS :)"<<endl;
+				goto A;
 				exit(0);
+				
 				break;
 			default :
 				cout<<"Invalid Input !"<<endl;
 				break;
-		}
-		
-			
+		}	
 	}
 	else if(choice == 2) { int user;
 		C:
@@ -589,9 +588,9 @@ int main() {
 				break;
 			case 4:
 				system("cls");
-				goto A;
 				cout<<"Thankyou for using SMS :)"<<endl;
-				exit(0);
+				Sleep(3000);
+				goto A;
 				break;
 			default :
 				break;
