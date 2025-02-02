@@ -56,7 +56,7 @@ void AddRecord() {
     cout<<"Enter you E-mainl Address"<<endl;
     getline(cin, email);
     inFile <<name<<","<<reg<<","<< course<<"," <<contact<<","<< email<<endl;
-    inFile.close();
+    inFile.close(); 
     cout<<"Records Added Successfuly ! "<<endl;
     
 }
@@ -284,7 +284,7 @@ void GradCheck() {
 			cout<<"You might entered a invalid input !"<<endl;
 		}
 		
-		if(avg <= 80) {
+		if(avg <= 100 && avg >= 80) {
 			cout<<"Congrats you got 100 % Scholarships "<<endl;
 		}
 		else {
@@ -375,7 +375,7 @@ void RegistrationStudent() {
 	ofstream outFile("student.txt", ios::app);
 	cin.ignore(); 
 	
-	string registration, name ,password;
+	string registration, name ,password, quez;
 	
 	cout<<"Enter your Full Name : ";
 	getline(cin, name);
@@ -383,8 +383,9 @@ void RegistrationStudent() {
 	getline(cin, registration);
 	cout<<"Enter Password : ";
 	getline(cin, password);
-	
-	outFile<<name<<","<<registration<<","<<password<<endl;
+	cout<<"Who is your favourait football player ? :- ";
+	getline(cin, quez);
+	outFile<<name<<","<<registration<<","<<password<<","<<quez<<endl;
 	outFile.close();
 	cout << "Registration successful!" << endl;
 	  
@@ -396,31 +397,33 @@ void ResetPassStudents() {
     ofstream tempFile("temp.txt");
     cin.ignore();
 
-    string name, registration, password, storeReg, storePass, inputAnswer, newPassword;
+    string name, registration, password, storeReg, storePass, inputAnswer, newPassword, storeQuez;
     bool found = false;
 
     cout << "Enter your Registration ID: ";
     getline(cin, registration);
 
-    cout << "Enter the answer to your security question: ";
+    cout << "Who is your favourait FootBall Player : ";
     getline(cin, inputAnswer);
 
     while (getline(inFile, name, ',') && 
            getline(inFile, storeReg, ',') && 
-           getline(inFile, storePass)) {
+           getline(inFile, storePass,',')&&
+		   getline(inFile, storeQuez)) {
         
-        if (storeReg == registration && storePass == inputAnswer) {
+        if (storeReg == registration && storeQuez == inputAnswer) {
             found = true;
 
-            cout << "Security question answered correctly!" << endl;
+            cout << "Security question answered correctly!" << endl<<endl;
             cout << "Enter your new password: ";
             getline(cin, newPassword);
 
-            tempFile << name << " , " << registration << " , " << newPassword << endl;
+            tempFile<<name<<","<<registration<<","<<newPassword<<","<<storeQuez<<endl;
             cout << "Password updated successfully!" << endl;
             break;
         } else {
-            tempFile << name << " , " << registration << " , " << storePass << endl;
+            tempFile<<name<<","<<registration<<","<<newPassword<<","<<storeQuez<< endl;
+
         }
     }
 
@@ -438,8 +441,8 @@ void ResetPassStudents() {
 
 
 void LoginStudent() {
-	ifstream inFile("student.txt");
-
+	ifstream inFile("student.txt", ios::in);
+	E:
 	string registration, password;
     cout << "Enter your Registration ID: ";
     cin.ignore();
@@ -447,31 +450,40 @@ void LoginStudent() {
     cout << "Enter Password: ";
     getline(cin, password);
 
-    string storeName, storeReg, storePass;  
+    string storeName, storeReg, storePass, storeQuez;  
     bool loginSuccess = false;
 
     while (getline(inFile, storeName, ',') &&  
            getline(inFile, storeReg, ',') && 
-           getline(inFile, storePass)) {
+           getline(inFile, storePass, ',')&&
+		   getline(inFile, storeQuez))
+		{
     	
     	if(storeReg == registration && storePass == password) {
-    		inFile.close();
-    		cout<<"Login Successfuly "<<endl;
+    		
     		system("cls");
-    		cout<<"Loading please wait !"<<endl;
+    		inFile.close();
+    		cout<<"\t\t\t\tLogin Successfuly "<<endl<<endl;
+    		Sleep(2000);
+//    		system("cls");
+    		cout<<"\t\t\t\tLoading please wait !"<<endl<<endl<<endl;
+    		Sleep(2000);
     		system("cls");
     		
+    	
     		D:
-    		system("cls");
     		Sleep(2000);
+    		system("cls");
     		int choice;
-    		cout<<"1 Add Records : "<<endl;
-    		cout<<"2 Search Records : "<<endl;
-    		cout<<"3 Update Records : "<<endl;
-    		cout<<"4 Delete Records : "<<endl;
-    		cout<<"5 View Records : "<<endl;
-    		cout<<"6 Check Grades"<<endl;
-    		cout<<"7 Exit Records : "<<endl;
+    		cout<<"-----------------------------------------------------------------------------------"<<endl<<endl;
+    		cout<<"\t\t\t\t1 Add Records : "<<endl;
+    		cout<<"\t\t\t\t2 Search Records : "<<endl;
+    		cout<<"\t\t\t\t3 Update Records : "<<endl;
+    		cout<<"\t\t\t\t4 Delete Records : "<<endl;
+    		cout<<"\t\t\t\t5 View Records : "<<endl;
+    		cout<<"\t\t\t\t6 Check Grades"<<endl;
+    		cout<<"\t\t\t\t7 Log out : "<<endl;
+    		cout<<"Enter your Choice: ";
     		cin>>choice;
     		switch(choice) {
     			case 1:
@@ -481,7 +493,14 @@ void LoginStudent() {
     			
     			case 2:
     				SearchRecord();
-    				goto D;
+    				int e;
+    				cout<<"-------------------------------------------------------------------------"<<endl;
+    				cout<<"\n\t\t\t0 exit !"<<endl;
+    				cin>>e;
+    				if(e == 0) {
+    					goto D;	
+					}
+    				
     				break;
     				
     			case 3:
@@ -504,13 +523,19 @@ void LoginStudent() {
     				break;
     				
     			case 7:
+    				Sleep(1000);
     				exit(0);
     				break;
     				
     			default :
     				break;
 			}//switch	
-		}	
+		}
+//		else {
+//			system("cls");
+//			cout<<"Your ID or password may be incorrect try again"<<endl<<endl;
+//			goto E;
+//		}	
 	}  
 }
 
@@ -526,7 +551,7 @@ int main() {
 	A:	
 	cout<<"\t\t\t\t1  Teacher "<<endl;
 	cout<<"\t\t\t\t2  Student "<<endl<<endl;
-	cout<<"\t\t\t\t2  Student "<<endl<<endl;
+	cout<<"\t\t\t\t3  Exit "<<endl<<endl;
 	cout<<"Enter your choice ! "<<endl;
 	cin>>choice;
 
@@ -552,7 +577,6 @@ int main() {
 			case 3:
 				system("cls");
 				cout<<"Thank you for using SMS :)"<<endl;
-				goto A;
 				exit(0);
 				
 				break;
