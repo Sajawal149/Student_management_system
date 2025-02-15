@@ -3,7 +3,7 @@
 #include <string>
 #include <windows.h>
 using namespace std;
-//only for techders view all student records 
+//only for teachers view all student records 
 void ViewAllRecords() {
 	
 	string name, reg, course, contact, email;
@@ -53,11 +53,11 @@ void AddRecord() {
    	getline(cin, course);
    	cout<<"Enter your Contact Number : "<<endl;
     getline(cin, contact);
-    cout<<"Enter you E-mainl Address"<<endl;
+    cout<<"Enter you E-mail Address"<<endl;
     getline(cin, email);
     inFile <<"RECORDS,"<<name<<","<<reg<<","<<course<<","<<contact<<","<<email<<endl;
     inFile.close(); 
-    cout<<"Records Added Successfuly ! "<<endl;
+    cout<<"Records Added Successfully! "<<endl;
     
 }
 
@@ -178,7 +178,7 @@ void DeleteRecord() {
     getline(cin, confirm);
 
     if (confirm != "yes") {
-        cout << "Deletion cancelled!" << endl;
+        cout << "Deletion canceled!" << endl;
         inFile.close();
         tempFile.close();
         return;
@@ -249,12 +249,12 @@ void GradCheck() {
 	float avg ;
 	int total_marks = 500;
 	int sum;
-	int english, urdu, maths, computer, physics;
+	int english, Urdu, maths, computer, physics;
 	cout<<"\t\t\t\tEnter the marks of 5 subjects out of total 100 marks each\n\n";
 	cout<<"Enter the marks of English\n";
 	cin>>english;
 	cout<<"Enter the marks of Urdu\n";
-	cin>>urdu;
+	cin>>Urdu;
 	cout<<"Enter the marks of Maths\n";
 	cin>>maths;
 	cout<<"Enter the marks of Computer\n";
@@ -294,7 +294,7 @@ void GradCheck() {
 		}
 	}
 
-//student records ends here
+//student records end here
 //registration starts here for teachers 
 void RegistrationTeacher() {
 	system("cls");
@@ -304,11 +304,11 @@ void RegistrationTeacher() {
 	cin.ignore(); 
 	string name, password, quez ;
 	string ID;	
-	cout<<"Enter you Full Name :";
+	cout<<"Enter your Full Name :";
 	getline(cin, name);
 	cout<<"Enter your Teacher ID :";
 	getline(cin, ID);
-	cout<<"Enter your Passwpord : ";
+	cout<<"Enter your Password : ";
 	getline(cin, password);
 	inFile <<name<<","<<ID<<","<<password<<endl;
 	inFile.close();
@@ -373,13 +373,13 @@ void LoginTeacher() {
     }	
 }
 
-//Registrations starst here for students
+//Registrations starts here for students
 void RegistrationStudent() {
 	system("cls");
 	ofstream outFile("student.txt", ios::app);
 	cin.ignore(); 
 	
-	string registration, name ,password, quez;
+	string registration, name , password, quez;
 	
 	cout<<"Enter your Full Name : ";
 	getline(cin, name);
@@ -387,7 +387,7 @@ void RegistrationStudent() {
 	getline(cin, registration);
 	cout<<"Enter Password : ";
 	getline(cin, password);
-	cout<<"Who is your favourait football player ? :- ";
+	cout<<"Who is your favorite football player ? :- ";
 	getline(cin, quez);
 	outFile<<"LOGIN,"<<name<<","<<registration<<","<<password<<","<<quez<<endl;
 	outFile.close();
@@ -407,7 +407,7 @@ void ResetPassStudents() {
     cout << "Enter your Registration ID: ";
     getline(cin, registration);
 
-    cout << "Who is your favourait FootBall Player : ";
+    cout << "Who is your favorite Football Player : ";
     getline(cin, inputAnswer);
 
     while (getline(inFile, name, ',') && 
