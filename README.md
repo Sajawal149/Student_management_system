@@ -3,7 +3,7 @@
 #include <string>
 #include <windows.h>
 using namespace std;
-//only for teachers view all student records 
+//only for teachers to view all student records 
 void ViewAllRecords() {
 	
 	string name, reg, course, contact, email;
@@ -249,10 +249,10 @@ void GradCheck() {
 	float avg ;
 	int total_marks = 500;
 	int sum;
-	int english, Urdu, maths, computer, physics;
+	int English, Urdu, maths, computer, physics;
 	cout<<"\t\t\t\tEnter the marks of 5 subjects out of total 100 marks each\n\n";
 	cout<<"Enter the marks of English\n";
-	cin>>english;
+	cin>>English;
 	cout<<"Enter the marks of Urdu\n";
 	cin>>Urdu;
 	cout<<"Enter the marks of Maths\n";
@@ -271,26 +271,26 @@ void GradCheck() {
 		}
 		else if(avg <= 85 && avg >= 75)
 		{
-			cout<<"You  achived 'B' grade  ";
+			cout<<"You  achieved 'B' grade  ";
 	    }
 	    else if(avg <= 75 && avg >= 65) {
-	    	cout<<"You  achived 'C' grade  ";
+	    	cout<<"You  achieved 'C' grade  ";
 		}
 	    else if(avg <= 55 && avg >= 55) {
-	    	cout<<"You  achived 'D' grade ";
+	    	cout<<"You  achieved 'D' grade ";
 		}
 	    else if(avg <= 55 ) {
-	    	cout<<"You  achived 'F' grade :( ";
+	    	cout<<"You  achieved 'F' grade :( ";
 		}
 		else{
-			cout<<"You might entered a invalid input !"<<endl;
+			cout<<"You might entered an invalid input !"<<endl;
 		}
 		
 		if(avg <= 100 && avg >= 80) {
 			cout<<"Congrats you got 100 % Scholarships "<<endl;
 		}
 		else {
-			cout<<"You didn not got the scholarship "<<endl;
+			cout<<"You did not get the scholarship "<<endl;
 		}
 	}
 
